@@ -45,3 +45,18 @@ const quotes = data?.quotes || [];
     )}
   </main>
 </Layout>
+
+<script>
+  import {confirmDeleteQuote} from '../scripts/quote-actions.js';
+
+  addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.form-delete-quote').forEach((deleteForm) => {
+      deleteForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+        confirmDeleteQuote(event.currentTarget);
+      });
+    });
+  });
+
+
+</script>
