@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "fluent-json-schema": "^4.0.0",
     "platformatic": "^0.1.0"
   }
 }

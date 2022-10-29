@@ -1,0 +1,1 @@
+curl --request POST http://localhost:3042/quotes/1/like

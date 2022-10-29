@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import QuoteActionEdit from '../components/QuoteActionEdit.astro';
 import QuoteActionDelete from '../components/QuoteActionDelete.astro';
+import QuoteActionLike from '../components/QuoteActionLike.astro';
 import { quotesApi, gql } from '../lib/quotes-api';
 
 const { data } = await quotesApi.query(gql`
@@ -11,6 +12,7 @@ const { data } = await quotesApi.query(gql`
       quote
       saidBy
       createdAt
+      likes
       movie {
         id
         name
@@ -34,6 +36,7 @@ const quotes = data?.quotes || [];
         </p>
         <div class="flex flex-col mb-6 text-gray-400">
           <span class="flex items-center">
+            <QuoteActionLike id={quote.id} likes={quote.likes} />
             <QuoteActionEdit id={quote.id} />
             <QuoteActionDelete id={quote.id} />
           </span>
@@ -47,7 +50,7 @@ const quotes = data?.quotes || [];
 </Layout>
 
 <script>
-  import {confirmDeleteQuote} from '../scripts/quote-actions.js';
+  import {confirmDeleteQuote, likeQuote} from '../scripts/quote-actions.js';
 
   addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.form-delete-quote').forEach((deleteForm) => {
@@ -56,7 +59,11 @@ const quotes = data?.quotes || [];
         confirmDeleteQuote(event.currentTarget);
       });
     });
+
+    document.querySelectorAll('.like-quote').forEach((container) => {
+      container.addEventListener('click', (e) => {
+        likeQuote(e.currentTarget);
+      }, { once: true });
+    });
   });
-
-
 </script>

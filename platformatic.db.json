@@ -4,12 +4,18 @@
       "level": "{PLT_SERVER_LOGGER_LEVEL}"
     },
     "hostname": "{PLT_SERVER_HOSTNAME}",
-    "port": "{PORT}"
+    "port": "{PORT}",
+    "cors": {
+      "origin": "{PLT_SERVER_CORS_ORIGIN}"
+    }
   },
   "core": {
     "connectionString": "{DATABASE_URL}"
   },
   "migrations": {
     "dir": "./migrations"
+  },
+  "plugin": {
+    "path": "./plugin.js"
   }
 }
